@@ -1,21 +1,22 @@
 on SWI#State do
 	if [DUMMY#DISPSTS] = 0
 		TaskValueSet DUMMY, DISPSTS, 1
-		timerSet,1,10
 	else
 		TaskValueSet DUMMY, DISPSTS, 0
-		timerSet,1,0
 	endif
 	
 	if [DUMMY#DISPSTS] = 0
 		OLEDCMD, off
+		timerSet,1,0
 	else
 		OLEDCMD, on
+		timerSet,1,10
 	endif
 		
 endon
 
-on Rules#Timer=1
+on Rules#Timer=1 do
+	TaskValueSet DUMMY, testVal, 1
 	if [DUMMY#DISPSTS] = 1
 		TaskValueSet DUMMY, DISPSTS, 0
 		OLEDCMD, off
