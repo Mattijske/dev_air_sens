@@ -1,0 +1,13 @@
+on CO2#PPM do
+	if [DUMMY#PPMSTS] = 0 and [CO2#PPM]>800
+		TaskValueSet DUMMY, PPMSTS, 1
+	elseif [DUMMY#PPMSTS] = 1 and [CO2#PPM] > 1500
+		TaskValueSet DUMMY, PPMSTS, 2
+	elseif [DUMMY#PPMSTS] = 2 and [CO2#PPM] < 1400
+		TaskValueSet DUMMY, PPMSTS, 1
+	elseif [DUMMY#PPMSTS] = 1 and [CO2#PPM] < 750 
+		TaskValueSet DUMMY, PPMSTS, 0
+	endif
+endon
+
+	
