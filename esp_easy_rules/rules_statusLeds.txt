@@ -8,6 +8,24 @@ on CO2#PPM do
 	elseif [DUMMY#PPMSTS] = 1 and [CO2#PPM] < 750 
 		TaskValueSet DUMMY, PPMSTS, 0
 	endif
+	
+	if [DUMMY#PPMSTS] = 0
+		GPIO, 2, 0
+		GPIO, 13, 0
+		GPIO, 15, 0
+	elseif [DUMMY#PPMSTS] = 1
+		GPIO, 13, 1
+		GPIO, 2, 1
+		GPIO, 15, 0
+	elseif [DUMMY#PPMSTS] = 2
+		GPIO, 15, 1
+		GPIO, 13, 0
+		GPIO, 2, 1
+	endif
+	
 endon
+
+
+	
 
 	
